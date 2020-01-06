@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
 import sys
 
+def convert(r):
+    start = r[0]
+    buf = r[1:53]
+    end = r[53:]
+    tmp = ""
+    for i in range(0, len(buf), 2):
+        #print(i)
+        if (buf[i] == "1" and buf[i+1] == "0"):
+            tmp += "1"
+        elif (buf[i] == "0" and buf[i+1] == "1"):
+            tmp += "0"
+        else:
+            print("Error in convert")
+    return start + tmp + end
+
 def is_sync(d, sz):
     if sz < 10:
         return False
@@ -50,8 +65,10 @@ def main(d):
                 i += 1
         else:
             i += 1
-            #print("error")
-    print("r: {}".format(r))
+            print("error")
+    #print("r[{}]: {}".format(len(r), r))
+    r = convert(r)
+    print("r[{}]: {}".format(len(r), r))
     return r
 
 if __name__ == "__main__":
